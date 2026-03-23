@@ -3,27 +3,84 @@
   <head>
     <meta charset="utf-8" />
     <title>Login</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6f8;
+        color: #111;
+      }
+      .wrap {
+        max-width: 420px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 18px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .field {
+        margin: 12px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 9px 14px;
+        border: 1px solid #111827;
+        background: #111827;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #0b1220;
+      }
+      .error {
+        background: #fff1f2;
+        border: 1px solid #fecdd3;
+        color: #9f1239;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+      }
+    </style>
   </head>
   <body>
-    <h2>Login</h2>
+    <div class="wrap">
+      <h2>Login</h2>
 
-    {% if error %}
-      <p>{{ error }}</p>
-    {% endif %}
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
 
-    <form method="post" action="{{ url_for('login') }}">
-      <div>
-        <label>Username</label>
-        <input type="text" name="username" value="admin" required />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" name="password" value="admin" required />
-      </div>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-    </form>
+      <form method="post" action="{{ url_for('login') }}">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" value="admin" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" value="admin" required />
+        </div>
+        <div class="field">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
 
