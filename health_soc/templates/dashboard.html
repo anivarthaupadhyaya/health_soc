@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h2>Dashboard</h2>
+
+    <form method="post" action="{{ url_for('logout') }}">
+      <button type="submit">Logout</button>
+    </form>
+
+    <hr />
+
+    <h3>Add record</h3>
+
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('dashboard') }}">
+      <input type="hidden" name="action" value="add" />
+      <div>
+        <label>Name</label>
+        <input type="text" name="name" required />
+      </div>
+      <div>
+        <label>Vaccine</label>
+        <input type="text" name="vaccine" required />
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+
+    <hr />
+
+    <h3>All patients</h3>
+
+    {% if patients and patients|length > 0 %}
+      <table border="1" cellpadding="6" cellspacing="0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Vaccine</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in patients %}
+            <tr>
+              <td>{{ p.id }}</td>
+              <td>{{ p.name }}</td>
+              <td>{{ p.vaccine }}</td>
+              <td>
+                <form method="post" action="{{ url_for('dashboard') }}">
+                  <input type="hidden" name="action" value="delete" />
+                  <input type="hidden" name="id" value="{{ p.id }}" />
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No records yet.</p>
+    {% endif %}
+  </body>
+</html>
+
